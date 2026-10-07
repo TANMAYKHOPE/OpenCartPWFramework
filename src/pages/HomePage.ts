@@ -92,6 +92,8 @@ export class HomePage extends BasePage {
         console.log(`Search key is: ${searchkey}`);
         await this.Search.fill(searchkey);
         await this.Searchicon.click();
+        console.log(`Search key is: ${searchkey}`);
+        
 
 
     }
