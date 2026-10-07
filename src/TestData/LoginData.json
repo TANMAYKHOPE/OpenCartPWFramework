@@ -1,0 +1,14 @@
+[
+  {
+    "username": "admin_user",
+    "password": "Password123!"
+  },
+  {
+    "username": "test_buyer",
+    "password": "SecurePass2026$"
+  },
+  {
+    "username": "guest_tester",
+    "password": "TemporaryPass99"
+  }
+]

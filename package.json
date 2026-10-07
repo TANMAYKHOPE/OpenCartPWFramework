@@ -1,0 +1,30 @@
+{
+  "name": "pwfm2026",
+  "version": "1.0.0",
+  "description": "OpenCart E2E Framework using Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:chrome": "npx playwright test --project=chromium",
+    "allure:generate": "npx allure generate allure-results --clean -o allure-report",
+    "allure:open": "npx allure open allure-report",
+    "allure:report": "npm run allure:generate && npm run allure:open",
+    "allure:clean": "rm -rf allure-results allure-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.62.0",
+    "@types/node": "^26.1.1",
+    "allure-commandline": "^2.46.1",
+    "allure-playwright": "^3.13.0"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.3",
+    "dotenv": "^18.0.5",
+    "xlsx": "^0.18.5"
+  }
+}

@@ -1,0 +1,21 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# env files (credentials)
+config/.env.*
+!config/.env.example
+
+# reports
+reports/
+allure-results/
+allure-report/
+playwright-report/
+test-results/
+
+# build
