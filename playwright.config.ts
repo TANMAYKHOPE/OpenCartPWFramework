@@ -40,7 +40,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'on-first-retry',
-    headless: false,
+    headless: true,  //for playwrightyml run--make false to see the browser
   },
 
   /* Configure projects for major browsers */
