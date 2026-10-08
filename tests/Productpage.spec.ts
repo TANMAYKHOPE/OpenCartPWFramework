@@ -1,5 +1,5 @@
 import { test, expect } from '../src/fixtures/pagefixtures';
-import { CsvHelper } from '../src/utils/CsvHelper';
+//import { CsvHelper } from '../src/utils/CsvHelper';
 
 
 test.beforeEach(async ({ loginPage }) => {
@@ -31,3 +31,5 @@ test(`verify the product information`, async({homePage,searchResultPage,productI
     expect.soft(actualProductinformation.get('ExTax')).toBe('$2,000.00');
 
 });
+
+//Assignment :-supply data from csv and json file to verify the product information
