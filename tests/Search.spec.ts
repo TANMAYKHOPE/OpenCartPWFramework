@@ -46,7 +46,7 @@ test(`verify the  search result counts via CSV- ${row.searchkey} - ${row.Product
 
 for (const row of ProductData) {
 
-test.skip(`verify user able to land  on product details page after clicking on product- ${row.searchkey}- ${row.Productname}`, async({homePage,searchResultPage, page})=>{
+test(`verify user able to land  on product details page after clicking on product- ${row.searchkey}- ${row.Productname}`, async({homePage,searchResultPage, page})=>{
 await homePage.dosearch(row.searchkey);
 await searchResultPage.selectProduct(row.Productname);
 expect(await page.title()).toBe(row.Productname);
