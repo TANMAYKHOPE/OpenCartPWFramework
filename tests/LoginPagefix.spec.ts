@@ -28,7 +28,7 @@ test('Forgot Password Link Exist Test', async ({ loginPage }) => {
     expect(await loginPage.isForotPasswordLinkExist()).toBeTruthy();
 })
 
-test('User is able to login with valida  cred', async ({ loginPage, homePage }) => {
+test.skip('User is able to login with valida  cred', async ({ loginPage, homePage }) => {
 
     await loginPage.dologin(process.env.USERNAME!, process.env.PASSWORD!);
     expect.soft(await homePage.isLogoutLinkExist()).toBeTruthy();

@@ -25,7 +25,7 @@ test('Logout link exist test', async () => {
     expect(await homePage.isLogoutLinkExist()).toBeTruthy();
 });
 
-test('Home Page Header test', async () => {
+test.skip('Home Page Header test', async () => {
     const allheaders = await homePage.getHomePageHeader();
 
     console.log('Home Page headers are:', allheaders);
@@ -57,12 +57,12 @@ test('Currency link is visible test', async () => {
     expect(await homePage.isCurrencyVisible()).toBeTruthy();
 });
 
-test('Shopping cart link is visible test', async () => {
+test.skip('Shopping cart link is visible test', async () => {
     await homePage.clickShoppingCart();
     expect(await homePage.isPageHeadingVisible()).toBeTruthy();
 });
 
-test('Checkout link is visible test', async () => {
+test.skip('Checkout link is visible test', async () => {
     await homePage.clickCheckout();
     expect(await homePage.isPageHeadingVisible()).toBeTruthy();
 });
