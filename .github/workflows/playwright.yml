@@ -6,6 +6,16 @@ on:
   # pull_request:
   #   branches: [master]
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run the tests'
+        required: true
+        default: 'QA'
+        type: choice
+        options:
+          - QA
+          - Staging
+          - Production
 
 jobs:
   test:
@@ -46,7 +56,7 @@ jobs:
       - name: Run tests
         run: npx playwright test --project=chromium
         env:
-          ENV: qa
+          ENV: ${{github.event.inputs.environment||'QA'}}
           BASE_URL: ${{ secrets.BASE_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
