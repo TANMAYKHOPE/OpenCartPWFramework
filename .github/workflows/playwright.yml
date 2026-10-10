@@ -1,10 +1,10 @@
 name: Playwright Tests
 
 on:
-  #push:
-  #  branches: [master]
-  #pull_request:
-   # branches: [master]
+  # push:
+  #   branches: [master]
+  # pull_request:
+  #   branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -20,21 +20,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
+          cache: npm
 
       - name: Cache Playwright browsers
         id: playwright-cache
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}  
-           restore-keys: |
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
             ${{ runner.os }}-playwright-
 
       - name: Check Playwright cache
         run: |
           echo "Cache hit: ${{ steps.playwright-cache.outputs.cache-hit }}"
-          ls -lah ~/.cache/ms-playwright || true   
+          ls -lah ~/.cache/ms-playwright || true
 
       - name: Install dependencies
         run: npm ci
@@ -60,6 +60,7 @@ jobs:
           name: playwright-html-report
           path: reports/html-report/
           retention-days: 30
+          if-no-files-found: warn
 
       - name: Upload Allure Results
         if: always()
@@ -68,3 +69,4 @@ jobs:
           name: allure-results
           path: allure-results/
           retention-days: 30
+          if-no-files-found: warn
