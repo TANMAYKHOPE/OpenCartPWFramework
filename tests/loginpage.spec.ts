@@ -19,6 +19,7 @@ test('Login Page Title Test', async ({ page }) => {
     const pageTitle = await loginPage.getLoginPageTitle();
     console.log(`Login Page Title is: ${pageTitle}`);
     expect(pageTitle).toBe('Account Login');
+    //playwright assertion library has 2 types of assertion hard and soft
 });
 
 test('Forgot Password Link Exist Test', async ({ page }) => {
