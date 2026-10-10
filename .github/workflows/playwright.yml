@@ -20,11 +20,27 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: 'npm'
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}  
+           restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Check Playwright cache
+        run: |
+          echo "Cache hit: ${{ steps.playwright-cache.outputs.cache-hit }}"
+          ls -lah ~/.cache/ms-playwright || true   
 
       - name: Install dependencies
         run: npm ci
 
       - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
 
       - name: Run tests
