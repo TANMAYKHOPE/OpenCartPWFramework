@@ -1,4 +1,5 @@
 import { test, expect } from '../src/fixtures/pagefixtures';
+import { HomePage } from '../src/pages/HomePage';
 //import { CsvHelper } from '../src/utils/CsvHelper';
 
 
@@ -11,14 +12,14 @@ test.beforeEach(async ({ loginPage }) => {
 
 
 test(`verify the prodcut imag`, async ({ homePage, searchResultPage, productInfoPage }) => {
-  await homePage.dosearch('MacBook');
+    await homePage.dosearch('MacBook');
     await searchResultPage.selectProduct('MacBook Pro');
     let imageCount = await productInfoPage.getProductImageCount();
     console.log(`Product Image Count is: ${imageCount}`);
     expect(imageCount).toBe(4);
 });
 
-test(`verify the product information`, async({homePage,searchResultPage,productInfoPage})=>{
+test(`verify the product information`, async ({ homePage, searchResultPage, productInfoPage }) => {
     await homePage.dosearch('MacBook');
     await searchResultPage.selectProduct('MacBook Pro');
     let actualProductinformation = await productInfoPage.getProductInformation();
@@ -32,4 +33,23 @@ test(`verify the product information`, async({homePage,searchResultPage,productI
 
 });
 
+
 //Assignment :-supply data from csv and json file to verify the product information
+
+test(`Verify product is added to the cart successfully`, async ({ homePage, searchResultPage, productInfoPage }) => {
+    await homePage.dosearch('MacBook');
+    await searchResultPage.selectProduct('MacBook Pro');
+    await productInfoPage.addProducttoCard();
+
+    const message = await productInfoPage.getAddToCartSuccessMessage();
+
+    expect(message).toContain(
+        'You have added MacBook Pro to your shopping cart!'
+    );
+
+
+
+
+
+
+});

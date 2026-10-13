@@ -11,6 +11,9 @@ export class ProductInfoPage extends BasePage {
     private readonly productImage: Locator;
     private readonly productMetaData: Locator;
     private readonly productPriceing: Locator;
+    private readonly AddtoCard:Locator;
+    private readonly Quantity:Locator;
+    private readonly AddtoCartSuccessMessage:Locator;
     private map: Map<string, string | number>;
 
     constructor(page: Page) {
@@ -20,6 +23,9 @@ export class ProductInfoPage extends BasePage {
         this.productMetaData = page.locator('div#content ul.list-unstyled:nth-of-type(1) li');
         this.productPriceing = page.locator('div#content ul.list-unstyled:nth-of-type(2) li');
         this.map = new Map<string, string | number>();
+        this.AddtoCard=page.getByRole('button',{name:'Add to Cart'});
+        this.Quantity=page.locator('#input-quantity');
+        this.AddtoCartSuccessMessage=page.locator('.alert.alert-success.alert-dismissible');
     }
 
     async getProductHeader(): Promise<string> {
@@ -31,6 +37,20 @@ export class ProductInfoPage extends BasePage {
         await this.productImage.first().waitFor({ state: 'visible', timeout: 4000 });
         return await this.productImage.count();
     }
+
+
+    async addProducttoCard():Promise<void>{
+       await this.Quantity.fill('2');
+       await this.AddtoCard.click();
+       //await  this.AddtoCartSuccessMessage.innerText();
+
+    }
+
+    
+async getAddToCartSuccessMessage(): Promise<string> {
+  return await this.AddtoCartSuccessMessage.innerText();
+}
+
 
     //encapsulation concept apply here to get product information and return as map
 
