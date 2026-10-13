@@ -11,9 +11,13 @@ export class ProductInfoPage extends BasePage {
     private readonly productImage: Locator;
     private readonly productMetaData: Locator;
     private readonly productPriceing: Locator;
-    private readonly AddtoCard:Locator;
-    private readonly Quantity:Locator;
-    private readonly AddtoCartSuccessMessage:Locator;
+    private readonly AddtoCard: Locator;
+    private readonly Quantity: Locator;
+    private readonly AddtoCartSuccessMessage: Locator;
+    private readonly ShoppingCart: Locator;
+    private readonly SuccessAlert: Locator;
+    private readonly Shoppingcardheader:Locator;
+
     private map: Map<string, string | number>;
 
     constructor(page: Page) {
@@ -23,9 +27,12 @@ export class ProductInfoPage extends BasePage {
         this.productMetaData = page.locator('div#content ul.list-unstyled:nth-of-type(1) li');
         this.productPriceing = page.locator('div#content ul.list-unstyled:nth-of-type(2) li');
         this.map = new Map<string, string | number>();
-        this.AddtoCard=page.getByRole('button',{name:'Add to Cart'});
-        this.Quantity=page.locator('#input-quantity');
-        this.AddtoCartSuccessMessage=page.locator('.alert.alert-success.alert-dismissible');
+        this.AddtoCard = page.getByRole('button', { name: 'Add to Cart' });
+        this.Quantity = page.locator('#input-quantity');
+        this.AddtoCartSuccessMessage = page.locator('.alert.alert-success.alert-dismissible');
+        this.ShoppingCart = page.locator('#product-product').getByRole('link', { name: 'shopping cart' });
+        this.SuccessAlert = page.locator('.alert-success');
+        this.Shoppingcardheader=page.getByRole('heading', { name: 'Shopping Cart (0.00kg)', level: 1 });
     }
 
     async getProductHeader(): Promise<string> {
@@ -39,17 +46,61 @@ export class ProductInfoPage extends BasePage {
     }
 
 
-    async addProducttoCard():Promise<void>{
-       await this.Quantity.fill('2');
-       await this.AddtoCard.click();
-       //await  this.AddtoCartSuccessMessage.innerText();
+    async addProducttoCard(): Promise<void> {
+        await this.Quantity.fill('2');
+        await this.AddtoCard.click();
+        //await  this.AddtoCartSuccessMessage.innerText();
 
     }
 
-    
-async getAddToCartSuccessMessage(): Promise<string> {
-  return await this.AddtoCartSuccessMessage.innerText();
-}
+
+    async getAddToCartSuccessMessage(): Promise<string> {
+        return await this.AddtoCartSuccessMessage.innerText();
+
+    }
+
+    async clickonShoppingcart(): Promise<string> {
+        await this.ShoppingCart.click();
+        const currentPageTitle = await this.page.title();
+        console.log(`Page title is: ${currentPageTitle}`);
+
+        return currentPageTitle;
+
+    }
+
+
+    // Verify success alert is visible
+    async isSuccessAlertVisible(): Promise<boolean> {
+        return await this.SuccessAlert.isVisible();
+    }
+
+    async getSuccessAlertMessage(): Promise<string> {
+        return await this.SuccessAlert.innerText();
+    }
+
+
+    // Verify success message contains the product name
+    async verifyProductInSuccessAlert(
+        productName: string
+    ): Promise<boolean> {
+        const message = await this.getSuccessAlertMessage();
+        return message.includes(productName);
+    }
+
+    async getShoppingCartLink(): Promise<Locator> {
+        return this.SuccessAlert.getByRole('link', {
+            name: /shopping cart/i
+        });
+    }
+
+    async getShppoingCardHeader():Promise<void>{
+
+       let shoppingheader=await this.Shoppingcardheader.allTextContents();
+       console.log(`Shopping card header text is--->`+shoppingheader);
+    }
+
+
+
 
 
     //encapsulation concept apply here to get product information and return as map
@@ -65,7 +116,7 @@ async getAddToCartSuccessMessage(): Promise<string> {
         }
     }
 
-    private async getProductPriceingData(): Promise<void> {
+     async getProductPriceingData(): Promise<void> {
 
         let priceData = await this.productPriceing.allInnerTexts();
         let ProdPrice = priceData[0].trim();
@@ -93,7 +144,7 @@ async getAddToCartSuccessMessage(): Promise<string> {
 
 
     //Assignment- product information add Quantity and add to cart button and  verify success message  , clikc on shoppig cart , land on new page and  create test.spec on shopping cart page.
-    
+
 
 
 
