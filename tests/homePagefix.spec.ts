@@ -63,3 +63,7 @@ test.skip('Checkout link is visible test', async ({ homePage }) => {
     await homePage.clickCheckout();
     expect(await homePage.isPageHeadingVisible()).toBeTruthy();
 });
+
+  test('Top navigation is visible', async ({ commonPage }) => {
+        await expect(commonPage.topNavigation).toBeVisible();
+    });

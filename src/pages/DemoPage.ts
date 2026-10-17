@@ -1,1 +1,0 @@
-let demoValue = 5;
