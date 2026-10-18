@@ -16,6 +16,13 @@ test(`verify page  logo on product page`, async ({ basepage }) => {
 
 });
 
+test(`verify footer on product page`, async({basepage})=>{
+ expect(await basepage.getFootercount()).toBe(16);
+
+})
+
+
+
 
 test(`verify the prodcut imag`, async ({ homePage, searchResultPage, productInfoPage }) => {
     await homePage.dosearch('MacBook');
