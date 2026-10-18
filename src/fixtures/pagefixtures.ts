@@ -6,14 +6,16 @@ import { CsvHelper } from "../utils/CsvHelper";
 import { ProductInfoPage } from "../pages/ProductInfo";
 import{ShoppingCartPage} from "../pages/ShoppingCartPage";
 import{CommonPage} from "../pages/CommonPage";
+import { BasePage } from "../pages/BasePage";
 //define type for test fixtures
 type MypageFixtures = {
+    basepage:BasePage,
     loginPage: LoginPage,
     homePage: HomePage,
     searchResultPage: SearchResultPage,
     productInfoPage: ProductInfoPage,
     shoppingCart: ShoppingCartPage;
-    commonPage: CommonPage;
+    //commonPage: CommonPage;
     testData: Record<string, string>[]
 };
 
@@ -49,9 +51,9 @@ export  let  test=baseTest.extend<MypageFixtures>({
         let shoppingCart = new ShoppingCartPage(page);
         await use(shoppingCart);
     },
-     commonPage: async ({ page }, use) => {
-        const commonPage = new CommonPage(page);
-        await use(commonPage);
+     basepage: async ({ page }, use) => {
+        const basepage = new BasePage(page);
+        await use(basepage);
     },
     testData : async({}, use)=>{
       let testData = CsvHelper.readCsv('src/TestData/LoginData.csv');

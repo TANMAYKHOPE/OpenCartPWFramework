@@ -10,6 +10,12 @@ test.beforeEach(async ({ loginPage }) => {
 
 });
 
+test(`verify page  logo on product page`, async ({ basepage }) => {
+    expect(await basepage.LogoVisible()).toBeTruthy();
+
+
+});
+
 
 test(`verify the prodcut imag`, async ({ homePage, searchResultPage, productInfoPage }) => {
     await homePage.dosearch('MacBook');
@@ -89,11 +95,11 @@ test('TC_CART_002 - Verify success message content', async ({
     );
 
     await productInfoPage.clickonShoppingcart();
-    
+
 });
 
 
-test(`verify Shopping cart Navigation`,async({homePage,searchResultPage,productInfoPage})=>{
+test(`verify Shopping cart Navigation`, async ({ homePage, searchResultPage, productInfoPage }) => {
     const productName = 'MacBook Pro';
     await homePage.dosearch(productName);
     await searchResultPage.selectProduct(productName);
