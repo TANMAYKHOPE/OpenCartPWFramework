@@ -25,14 +25,14 @@ export class HomePage extends BasePage {
         super(page);
         this.logoutlink = page.getByRole('link', { name: 'Logout' }).first();
         this.Headers = page.getByRole('heading', { level: 2 }).first();
-        this.logo= page.getByRole('img', { name: 'naveenopencart' });
-        this .searchInput=page.getByRole('textbox', { name: 'Search' });
-        this.currencyLink=page.getByRole('button', { name: '$ Currency' })
-        this.wishListLink=page.getByRole('link', { name: 'Wish List (0)' })
-        this.shoppingCartLink=page.getByRole('link', { name: 'Shopping Cart' })
-        this.checkoutLink=page.getByRole('link', { name: 'Checkout' })
-        this.Search=page.getByRole('textbox', { name: 'Search' });
-        this.Searchicon=page.locator('div#search button');
+        this.logo = page.getByRole('img', { name: 'naveenopencart' });
+        this.searchInput = page.getByRole('textbox', { name: 'Search' });
+        this.currencyLink = page.getByRole('button', { name: '$ Currency' })
+        this.wishListLink = page.getByRole('link', { name: 'Wish List (0)' })
+        this.shoppingCartLink = page.getByRole('link', { name: 'Shopping Cart' })
+        this.checkoutLink = page.getByRole('link', { name: 'Checkout' })
+        this.Search = page.getByRole('textbox', { name: 'Search' });
+        this.Searchicon = page.locator('div#search button');
 
     }
 
@@ -50,10 +50,10 @@ export class HomePage extends BasePage {
     }
 
     async BreadcrumbExist(): Promise<boolean> {
-        return await this.page.getByRole('link', { name: 'Account' ,exact: true}).isVisible();
+        return await this.page.getByRole('link', { name: 'Account', exact: true }).isVisible();
     }
 
-        async isPageHeadingVisible(): Promise<boolean> {
+    async isPageHeadingVisible(): Promise<boolean> {
         return this.Headers.isVisible();
     }
 
@@ -86,14 +86,14 @@ export class HomePage extends BasePage {
     }
 
 
-    async dosearch(searchkey:string): Promise<void> {
+    async dosearch(searchkey: string): Promise<void> {
 
 
         console.log(`Search key is: ${searchkey}`);
         await this.Search.fill(searchkey);
         await this.Searchicon.click();
         console.log(`Search key is: ${searchkey}`);
-        
+
 
 
     }
